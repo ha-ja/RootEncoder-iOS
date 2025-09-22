@@ -13,12 +13,11 @@ public class RtpDisplay: DisplayBase {
         return client
     }
     
-    public func startStream(host: String, port: Int, localRtpPort: Int = 50020, enableRtcp: Bool = false) {
+    public func startStream(host: String, port: Int, enableRtcp: Bool = false) {
         super.startStream(endpoint: "rtp://\(host):\(port)")
         client.connect(
             host: host,
             port: port,
-            localRtpPort: localRtpPort,
             enableRtcp: enableRtcp
         )
         

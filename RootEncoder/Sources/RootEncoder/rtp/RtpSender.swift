@@ -10,8 +10,19 @@ public class RtpSender: BaseSender {
         super.init(callback: callback, tag: "Rtp")
     }
 
-    public func setDestination(host: String, port: Int, localRtpPort: Int = 50020, enableRtcp: Bool = false) {
-        rtpSocket = RtpUdpSocket(callback: callback, host: host, port: port, localPort: localRtpPort)
+    public func setDestination(
+        host: String,
+        port: Int,
+        localRtpPort: Int = 50020,
+        enableRtcp: Bool = false
+    ) {
+        rtpSocket = RtpUdpSocket(
+            callback: callback,
+            host: host,
+            port: port,
+            localPort: localRtpPort // UDP Constructor
+        )
+        
         if enableRtcp {
             // In a single-port setup RTCP can be disabled; optionally provide a dedicated RTCP port pair if needed
             senderReport = SenderReportUdp(
@@ -29,7 +40,9 @@ public class RtpSender: BaseSender {
 
     public override func onRun() {
         let ssrcVideo = UInt64(Int.random(in: 0..<Int.max))
+        
         videoPacketizer?.setSSRC(ssrc: ssrcVideo)
+        
         while (self.running) {
             let mediaFrame = self.queue.dequeue()
             guard let mediaFrame = mediaFrame, mediaFrame.type == .VIDEO else { continue }
