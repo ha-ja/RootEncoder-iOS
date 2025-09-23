@@ -51,13 +51,13 @@ public class RtpSender: BaseSender {
                     var size = 0
                     for frame in rtpFrames {
                         try self.rtpSocket?.sendFrame(rtpFrame: frame)
-                        size += frame.length
+                        let packetSize = frame.length
+                        size += packetSize
                         self.videoFramesSent += 1
-                        self.bitrateManager.calculateBitrate(size: Int64(size * 8))
+                        self.bitrateManager.calculateBitrate(size: Int64(packetSize * 8))
+                        // RTCP sender report handling - only active when enableRtcp is true
                         if (try self.senderReport?.update(rtpFrame: frame) == true) {
-                            if self.isEnableLogs {
-                                print("rtcp report sent")
-                            }
+                            self.bitrateManager.calculateBitrate(size: Int64(RtpConstants.REPORT_PACKET_LENGTH * 8))
                         }
                     }
                     self.rtpSocket?.flush()
