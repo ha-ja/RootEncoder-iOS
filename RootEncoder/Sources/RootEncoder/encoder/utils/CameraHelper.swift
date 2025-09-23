@@ -25,7 +25,11 @@ public class CameraHelper {
     }
     
     public static func getOrientation() -> UIInterfaceOrientation {
-        return UIApplication.shared.windows.first?.windowScene?.interfaceOrientation ?? .landscapeRight
+        guard let windowScene = UIApplication.shared.windows.first?.windowScene else {
+            print("CameraHelper windowScene is nil")
+            return .landscapeRight
+        }
+        return windowScene.interfaceOrientation
     }
     
     public enum Facing {
