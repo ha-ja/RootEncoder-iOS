@@ -5,22 +5,21 @@ public class RtpClient {
     private let sender: RtpSender
     private let connectChecker: ConnectChecker
     private var streaming = false
-    private var audioDisabled = true
-    private var videoDisabled = false
 
     public init(connectChecker: ConnectChecker) {
         self.connectChecker = connectChecker
         self.sender = RtpSender(callback: connectChecker)
+        
+        self.setOnlyVideo(onlyVideo: true)
     }
 
     public func setOnlyVideo(onlyVideo: Bool) {
-        videoDisabled = false
-        audioDisabled = onlyVideo
+        RtpConstants.trackVideo = 0
+        RtpConstants.trackAudio = 1
     }
 
     public func setOnlyAudio(onlyAudio: Bool) {
-        audioDisabled = false
-        videoDisabled = onlyAudio
+        // Ignored in video-only setup
     }
 
     public func setAudioInfo(sampleRate: Int, isStereo: Bool) {
@@ -58,19 +57,17 @@ public class RtpClient {
     public func isStreaming() -> Bool { streaming }
 
     public func sendVideo(buffer: Array<UInt8>, ts: UInt64) {
-        if (!videoDisabled) {
-            sender.sendMediaFrame(
-                mediaFrame: MediaFrame(
-                    data: buffer,
-                    info: MediaFrame.Info(
-                        offset: 0,
-                        size: buffer.count,
-                        timestamp: ts
-                    ),
-                    type: MediaFrame.MediaType.VIDEO
-                )
+        sender.sendMediaFrame(
+            mediaFrame: MediaFrame(
+                data: buffer,
+                info: MediaFrame.Info(
+                    offset: 0,
+                    size: buffer.count,
+                    timestamp: ts
+                ),
+                type: MediaFrame.MediaType.VIDEO
             )
-        }
+        )
     }
 }
 
