@@ -1,5 +1,6 @@
 import AVFoundation
 import Foundation
+import UIKit
 
 public class RtpDisplayBase {
   
@@ -10,6 +11,16 @@ public class RtpDisplayBase {
   private var fpsListener = FpsListener()
   private var callback: DisplayBaseCallback? = nil
   private(set) public var metalInterface: MetalInterface
+  private var width: Int {
+    get {
+      return Int(UIScreen.main.bounds.width)
+    }
+  }
+  private var height: Int {
+    get {
+      return Int(UIScreen.main.bounds.height)
+    }
+  }
   
   public init() {
     metalInterface = MetalStreamInterface()
@@ -26,9 +37,7 @@ public class RtpDisplayBase {
   }
   
   public func prepareVideo() -> Bool {
-    let w = 1280
-    let h = 720
-    return prepareVideo(width: w, height: h, fps: 30, bitrate: 1200 * 1024, iFrameInterval: 2, rotation: 0)
+    return prepareVideo(width: width, height: height, fps: 25, bitrate: 1000 * 1024, iFrameInterval: 1, rotation: 0)
   }
   
   public func setFpsListener(fpsCallback: FpsCallback) {
