@@ -20,11 +20,6 @@ public class RtpDisplay: RtpDisplayBase {
             port: port,
             enableRtcp: enableRtcp
         )
-        
-        // Force keyframe after a short delay to ensure SPS/PPS is sent
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-            self.videoEncoder.forceKeyFrame()
-        }
     }
     
   override public func stopStream() {
@@ -35,10 +30,6 @@ public class RtpDisplay: RtpDisplayBase {
         // H264 is relevant; packetizer is driven by SPS/PPS provided by the encoder
     }
     
-//    override func setAudioCodecImp(codec: AudioCodec) {
-//        // Not used in video-only RTP setup
-//    }
-
     override func stopStreamImp() {
         client.disconnect()
     }
@@ -47,14 +38,6 @@ public class RtpDisplay: RtpDisplayBase {
         // Not used – there is no RTSP endpoint in RTP-only mode
     }
     
-//    override func onAudioInfoImp(sampleRate: Int, isStereo: Bool) {
-//        // Ignored (video-only)
-//    }
-    
-//    override func getAudioDataImp(frame: Frame) {
-//        // Ignored
-//    }
-
     override func getVideoDataImp(frame: Frame) {
         client.sendVideo(buffer: frame.buffer, ts: frame.timeStamp)
     }

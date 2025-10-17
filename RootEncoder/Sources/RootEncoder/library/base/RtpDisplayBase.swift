@@ -27,6 +27,7 @@ public class RtpDisplayBase {
     let callback = createRtpDisplayBaseCallbacks()
     self.callback = callback
     videoEncoder = VideoEncoder(callback: callback)
+    videoEncoder.forceKeyFrame()
   }
   
   public func prepareVideo(width: Int, height: Int, fps: Int, bitrate: Int, iFrameInterval: Int, rotation: Int = 0) -> Bool {

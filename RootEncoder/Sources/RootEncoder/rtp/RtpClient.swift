@@ -10,20 +10,9 @@ public class RtpClient {
         self.connectChecker = connectChecker
         self.sender = RtpSender(callback: connectChecker)
         
-        self.setOnlyVideo(onlyVideo: true)
-    }
-
-    public func setOnlyVideo(onlyVideo: Bool) {
-        RtpConstants.trackVideo = 0
-        RtpConstants.trackAudio = 1
-    }
-
-    public func setOnlyAudio(onlyAudio: Bool) {
-        // Ignored in video-only setup
-    }
-
-    public func setAudioInfo(sampleRate: Int, isStereo: Bool) {
-        // Ignored in video-only setup
+      // Set only video
+      RtpConstants.trackVideo = 0
+      RtpConstants.trackAudio = 1
     }
 
     public func setVideoInfo(sps: Array<UInt8>, pps: Array<UInt8>, vps: Array<UInt8>?) {
@@ -34,6 +23,7 @@ public class RtpClient {
         )
     }
 
+    // TODO: Why local port 50020?
     public func connect(host: String, port: Int, localRtpPort: Int = 50020, enableRtcp: Bool = false) {
         sender.setDestination(
             host: host,
