@@ -1,6 +1,6 @@
 import Foundation
 
-public class RtpDisplay: DisplayBase {
+public class RtpDisplay: RtpDisplayBase {
 
     private var client: RtpClient!
 
@@ -27,7 +27,7 @@ public class RtpDisplay: DisplayBase {
         }
     }
     
-    override public func stopStream() {
+  override public func stopStream() {
         client.disconnect()
     }
     
@@ -35,9 +35,9 @@ public class RtpDisplay: DisplayBase {
         // H264 is relevant; packetizer is driven by SPS/PPS provided by the encoder
     }
     
-    override func setAudioCodecImp(codec: AudioCodec) {
-        // Not used in video-only RTP setup
-    }
+//    override func setAudioCodecImp(codec: AudioCodec) {
+//        // Not used in video-only RTP setup
+//    }
 
     override func stopStreamImp() {
         client.disconnect()
@@ -47,13 +47,13 @@ public class RtpDisplay: DisplayBase {
         // Not used – there is no RTSP endpoint in RTP-only mode
     }
     
-    override func onAudioInfoImp(sampleRate: Int, isStereo: Bool) {
-        // Ignored (video-only)
-    }
+//    override func onAudioInfoImp(sampleRate: Int, isStereo: Bool) {
+//        // Ignored (video-only)
+//    }
     
-    override func getAudioDataImp(frame: Frame) {
-        // Ignored
-    }
+//    override func getAudioDataImp(frame: Frame) {
+//        // Ignored
+//    }
 
     override func getVideoDataImp(frame: Frame) {
         client.sendVideo(buffer: frame.buffer, ts: frame.timeStamp)
