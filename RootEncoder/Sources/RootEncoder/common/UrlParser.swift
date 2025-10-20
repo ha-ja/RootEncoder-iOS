@@ -14,8 +14,6 @@ public class UrlParser {
     private(set) var port: Int? = nil
     private(set) var path: String = ""
     private(set) var query: String? = nil
-    private(set) var authUser: String? = nil
-    private(set) var authPassword: String? = nil
     private let url: String
     
     private init(uri: URL, url: String) {
@@ -29,8 +27,6 @@ public class UrlParser {
             let i: String.Index = url.range(of: uri.query!)?.lowerBound ?? String.Index(utf16Offset: 0, in: url)
             query = String(url[i...])
         }
-        authUser = uri.user
-        authPassword = uri.password
     }
     
     public static func parse(endpoint: String, requiredProtocols: [String]) throws -> UrlParser {

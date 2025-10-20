@@ -16,8 +16,4 @@ public protocol ConnectChecker {
     func onNewBitrate(bitrate: UInt64)
     
     func onDisconnect()
-    
-    func onAuthError()
-    
-    func onAuthSuccess()
 }
