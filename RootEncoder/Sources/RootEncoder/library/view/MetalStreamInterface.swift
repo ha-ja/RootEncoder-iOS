@@ -61,7 +61,6 @@ public class MetalStreamInterface: MetalInterface {
     private let aspectRatioMode = AspectRatioMode.ADJUST
     private var rotation = 0
     private var rotated = false
-    private let sensorManager = SensorManager()
     private weak var mtkView: MTKView? = nil
     private var previewWidth: CGFloat? = nil
     private var previewHeight: CGFloat? = nil
@@ -71,12 +70,6 @@ public class MetalStreamInterface: MetalInterface {
         self.commandQueue = device.makeCommandQueue()!
         self.context = CIContext(mtlDevice: device)
         CVMetalTextureCacheCreate(kCFAllocatorDefault, nil, device, nil, &textureCache)
-        sensorManager.start { orientation in
-            self.rotated = ((self.rotation == 0 || self.rotation == 180) && (orientation == 90 || orientation == 270)) ||
-            ((self.rotation == 90 || self.rotation == 270) && (orientation == 0 || orientation == 180))
-            self.rotation = orientation
-            print("SensorManager rotated: \(self.rotation)")
-        }
     }
     
     public func setOrientation(orientation: Int) {
