@@ -4,7 +4,6 @@ public class RtpSender: BaseSender {
 
     private var videoPacketizer: RtspBasePacket?
     private var rtpSocket: BaseRtpSocket?
-    private var senderReport: BaseSenderReport?
 
     public init(callback: ConnectChecker) {
         super.init(callback: callback, tag: "Rtp")
@@ -22,16 +21,6 @@ public class RtpSender: BaseSender {
             port: port,
             localPort: localRtpPort // UDP Constructor
         )
-        
-        if enableRtcp {
-            // In a single-port setup RTCP can be disabled; optionally provide a dedicated RTCP port pair if needed
-            senderReport = SenderReportUdp(
-                callback: callback,
-                host: host,
-                videoPorts: [localRtpPort + 2, port + 1],
-                audioPorts: [localRtpPort + 4, port + 3]
-            )
-        }
     }
 
     public override func setVideoInfo(sps: Array<UInt8>, pps: Array<UInt8>, vps: Array<UInt8>?) {
@@ -55,10 +44,6 @@ public class RtpSender: BaseSender {
                         size += packetSize
                         self.videoFramesSent += 1
                         self.bitrateManager.calculateBitrate(size: Int64(packetSize * 8))
-                        // RTCP sender report handling - only active when enableRtcp is true
-                        if (try self.senderReport?.update(rtpFrame: frame) == true) {
-                            self.bitrateManager.calculateBitrate(size: Int64(RtpConstants.REPORT_PACKET_LENGTH * 8))
-                        }
                     }
                     self.rtpSocket?.flush()
                 } catch let error {
@@ -70,7 +55,6 @@ public class RtpSender: BaseSender {
     }
 
     public override func stopImp(clear: Bool = true) {
-        senderReport?.close()
         videoPacketizer?.reset()
         rtpSocket?.close()
     }
