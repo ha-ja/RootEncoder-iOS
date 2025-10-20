@@ -111,10 +111,6 @@ extension RtpDisplayBase {
   func createRtpDisplayBaseCallbacks() -> DisplayBaseCallback {
     class RtpDisplayBaseCallbackHandler: DisplayBaseCallback {
       
-      func getPcmData(frame: PcmFrame) {
-        // NOOP - No local recording and no audio
-      }
-      
       private let displayBase: RtpDisplayBase
       
       init(displayBase: RtpDisplayBase) {
