@@ -13,9 +13,7 @@ public class BaseSender {
     let queue: SynchronizedQueue<MediaFrame>
     let callback: ConnectChecker
 
-    var audioFramesSent = 0
     var videoFramesSent = 0
-    var droppedAudioFrames = 0
     var droppedVideoFrames = 0
     let bitrateManager: BitrateManager
     var isEnableLogs = true
@@ -27,7 +25,6 @@ public class BaseSender {
     }
 
     public func setVideoInfo(sps: Array<UInt8>, pps: Array<UInt8>, vps: Array<UInt8>?) { }
-    public func setAudioInfo(sampleRate: Int, isStereo: Bool) { }
     public func onRun() { }
     public func stopImp(clear: Bool = true) { }
     
@@ -36,9 +33,6 @@ public class BaseSender {
             if mediaFrame.type == MediaFrame.MediaType.VIDEO {
                 print("Video frame discarded")
                 droppedVideoFrames += 1
-            } else {
-                print("Audio frame discarded")
-                droppedAudioFrames += 1
             }
         }
     }
@@ -58,9 +52,7 @@ public class BaseSender {
         stopImp(clear: clear)
         queue.clear()
         videoFramesSent = 0
-        audioFramesSent = 0
         droppedVideoFrames = 0
-        droppedAudioFrames = 0
     }
     
     public func hasCongestion(percentUsed: Float) -> Bool {
