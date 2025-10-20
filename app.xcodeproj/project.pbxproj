@@ -18,7 +18,6 @@
 		EBA4FFD32ABA5C1300249638 /* CameraSwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBA4FFD22ABA5C1300249638 /* CameraSwiftUIView.swift */; };
 		EBA4FFD52ABA62E500249638 /* CameraUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBA4FFD42ABA62E500249638 /* CameraUIView.swift */; };
 		EBC318B62B9E79BF003C7526 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC318B52B9E79BF003C7526 /* Utils.swift */; };
-		EBC8FD302C09214600345CFC /* ScreenSwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC8FD2F2C09214600345CFC /* ScreenSwiftUIView.swift */; };
 		EBDA58A72BEE915E002F85A2 /* RootEncoder in Frameworks */ = {isa = PBXBuildFile; productRef = EBDA58A62BEE915E002F85A2 /* RootEncoder */; };
 		EBE05D492C6034A100C57A4D /* FilterUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE05D482C6034A100C57A4D /* FilterUIView.swift */; };
 		EBF49F522CB282B0003D767B /* StreamSwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF49F512CB282B0003D767B /* StreamSwiftUIView.swift */; };
@@ -75,7 +74,6 @@
 		EBA4FFD22ABA5C1300249638 /* CameraSwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraSwiftUIView.swift; sourceTree = "<group>"; };
 		EBA4FFD42ABA62E500249638 /* CameraUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraUIView.swift; sourceTree = "<group>"; };
 		EBC318B52B9E79BF003C7526 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
-		EBC8FD2F2C09214600345CFC /* ScreenSwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenSwiftUIView.swift; sourceTree = "<group>"; };
 		EBE05D482C6034A100C57A4D /* FilterUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterUIView.swift; sourceTree = "<group>"; };
 		EBF49F512CB282B0003D767B /* StreamSwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamSwiftUIView.swift; sourceTree = "<group>"; };
 		EBF49F532CB284F2003D767B /* MetalUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalUIView.swift; sourceTree = "<group>"; };
@@ -142,7 +140,6 @@
 				EBA4FFD22ABA5C1300249638 /* CameraSwiftUIView.swift */,
 				EBF49F512CB282B0003D767B /* StreamSwiftUIView.swift */,
 				EBA4000F2ABA6A1600249638 /* MainSwiftUIView.swift */,
-				EBC8FD2F2C09214600345CFC /* ScreenSwiftUIView.swift */,
 			);
 			path = app;
 			sourceTree = "<group>";
@@ -328,7 +325,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EBC8FD302C09214600345CFC /* ScreenSwiftUIView.swift in Sources */,
 				044138352501A02300732969 /* StreamerApp.swift in Sources */,
 				EBA400102ABA6A1600249638 /* MainSwiftUIView.swift in Sources */,
 				EBA400122ABA7AED00249638 /* ToastView.swift in Sources */,
