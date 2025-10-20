@@ -112,7 +112,7 @@ public class RtpDisplayBase {
   }
 }
 
-protocol DisplayBaseCallback: GetMicrophoneData, GetCameraData, GetAudioData, GetVideoData, MetalViewCallback {}
+protocol DisplayBaseCallback: GetMicrophoneData, GetCameraData, GetVideoData, MetalViewCallback {}
 
 extension RtpDisplayBase {
   func createRtpDisplayBaseCallbacks() -> DisplayBaseCallback {
