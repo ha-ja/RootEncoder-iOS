@@ -15,13 +15,11 @@ public class BaseSender {
 
     var videoFramesSent = 0
     var droppedVideoFrames = 0
-    let bitrateManager: BitrateManager
     var isEnableLogs = true
     
     public init(callback: ConnectChecker, tag: String) {
         self.callback = callback
         queue = SynchronizedQueue<MediaFrame>(label: "\(tag)SenderQueue", size: cacheSize)
-        bitrateManager = BitrateManager(connectChecker: callback)
     }
 
     public func setVideoInfo(sps: Array<UInt8>, pps: Array<UInt8>, vps: Array<UInt8>?) { }

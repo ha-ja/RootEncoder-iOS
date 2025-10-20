@@ -43,7 +43,6 @@ public class RtpSender: BaseSender {
                         let packetSize = frame.length
                         size += packetSize
                         self.videoFramesSent += 1
-                        self.bitrateManager.calculateBitrate(size: Int64(packetSize * 8))
                     }
                     self.rtpSocket?.flush()
                 } catch let error {
