@@ -112,7 +112,7 @@ public class RtpDisplayBase {
   }
 }
 
-protocol DisplayBaseCallback: GetMicrophoneData, GetCameraData, GetVideoData, MetalViewCallback {}
+protocol DisplayBaseCallback: GetCameraData, GetVideoData, MetalViewCallback {}
 
 extension RtpDisplayBase {
   func createRtpDisplayBaseCallbacks() -> DisplayBaseCallback {
@@ -120,10 +120,6 @@ extension RtpDisplayBase {
       
       func getPcmData(frame: PcmFrame) {
         // NOOP - No local recording and no audio
-      }
-      
-      func getAudioData(frame: Frame) {
-        // NOOP - No audio data necessary
       }
       
       private let displayBase: RtpDisplayBase

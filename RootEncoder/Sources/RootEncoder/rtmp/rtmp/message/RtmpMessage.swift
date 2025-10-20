@@ -39,8 +39,6 @@ public class RtmpMessage: CustomStringConvertible {
             rtmpMessage = WindowAcknowledgementSize()
         case .SET_PEER_BANDWIDTH:
             rtmpMessage = SetPeerBandwidth()
-        case .AUDIO:
-            rtmpMessage = Audio()
         case .VIDEO:
             rtmpMessage = Video()
         case .DATA_AMF3:

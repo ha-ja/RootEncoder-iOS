@@ -54,12 +54,6 @@ public enum MessageType: UInt8 {
     case SET_PEER_BANDWIDTH = 0x06
 
     /**
-   * RTMP audio packet (0x08)
-   * The client or the server sends this message to send audio data to the peer.
-   */
-    case AUDIO = 0x08
-
-    /**
    * RTMP video packet (0x09)
    * The client or the server sends this message to send video data to the peer.
    */
