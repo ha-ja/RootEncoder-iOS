@@ -10,7 +10,7 @@ public class RtpDisplayBase {
   private var onPreview = false
   private var fpsListener = FpsListener()
   private var callback: DisplayBaseCallback? = nil
-  private(set) public var metalInterface: MetalInterface
+  //private(set) public var metalInterface: MetalInterface
   private var width: Int {
     get {
       return Int(UIScreen.main.bounds.width)
@@ -23,7 +23,7 @@ public class RtpDisplayBase {
   }
   
   public init() {
-    metalInterface = MetalStreamInterface()
+    // metalInterface = MetalStreamInterface()
     let callback = createRtpDisplayBaseCallbacks()
     self.callback = callback
     videoEncoder = VideoEncoder(callback: callback)
@@ -31,9 +31,9 @@ public class RtpDisplayBase {
   }
   
   public func prepareVideo(width: Int, height: Int, fps: Int, bitrate: Int, iFrameInterval: Int, rotation: Int = 0) -> Bool {
-    metalInterface.setEncoderSize(width: width, height: height)
-    metalInterface.setForceFps(fps: fps)
-    metalInterface.setOrientation(orientation: rotation)
+    //metalInterface.setEncoderSize(width: width, height: height)
+    //metalInterface.setForceFps(fps: fps)
+    //metalInterface.setOrientation(orientation: rotation)
     return videoEncoder.prepareVideo(width: width, height: height, fps: fps, bitrate: bitrate, iFrameInterval: iFrameInterval, rotation: rotation)
   }
   
@@ -47,11 +47,11 @@ public class RtpDisplayBase {
   
   private func startEncoders() {
     videoEncoder.start()
-    metalInterface.setCallback(callback: callback)
+    //metalInterface.setCallback(callback: callback)
   }
   
   private func stopEncoders() {
-    metalInterface.setCallback(callback: nil)
+    //metalInterface.setCallback(callback: nil)
     videoEncoder.stop()
   }
   
@@ -129,7 +129,7 @@ extension RtpDisplayBase {
       }
       
       public func getYUVData(from buffer: CMSampleBuffer) {
-        displayBase.metalInterface.sendBuffer(buffer: buffer)
+        // displayBase.metalInterface.sendBuffer(buffer: buffer)
       }
       
       func getVideoData(pixelBuffer: CVPixelBuffer, pts: CMTime) {
