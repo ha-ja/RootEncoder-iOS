@@ -15,21 +15,9 @@ public extension Array {
         destiny[index...index + length - 1] = self[0...length - 1]
         self.removeFirst(length)
     }
-    
 }
 
-public extension Array where Element: Equatable {
-    func removeDuplicates() -> [Element] {
-        var result = [Element]()
-        for value in self {
-            if result.contains(value) == false {
-                result.append(value)
-            }
-        }
-        return result
-    }
-}
-
+// TODO: Check if these extension function are still useful. Maybe move buffer rotation here as well.
 public extension CIImage {
     
     func cropToAspectRatio(aspectRatio: CGFloat) -> CIImage {
@@ -73,81 +61,6 @@ public extension Date {
     }
 }
 
-public extension String {
-    subscript (range: Range<Int>) -> Substring {
-        let startIndex = self.index(self.startIndex, offsetBy: range.startIndex)
-        let stopIndex = self.index(self.startIndex, offsetBy: range.startIndex + range.count)
-        return self[startIndex..<stopIndex]
-    }
-    func groups(for regexPattern: String) -> [[String]] {
-        do {
-            let text = self
-            let regex = try NSRegularExpression(pattern: regexPattern)
-            let matches = regex.matches(in: text,
-                                    range: NSRange(text.startIndex..., in: text))
-            return matches.map { match in
-                (0..<match.numberOfRanges).map {
-                    let rangeBounds = match.range(at: $0)
-                    guard let range = Range(rangeBounds, in: text) else {
-                        return ""
-                    }
-                    return String(text[range])
-                }
-            }
-        } catch _ {
-            return []
-        }
-    }
-    var md5: String {
-        let data = Data(utf8)
-        let digestData = Insecure.MD5.hash(data: data)
-        return String(digestData.map { String(format: "%02x", $0) }.joined())
-    }
-    
-    var md5Base64: String {
-        let data = Data(utf8)
-        let digestData = Data(Insecure.MD5.hash(data: data))
-        return digestData.base64EncodedString()
-    }
-}
-
 public func intToBytes<T>(from value: T) -> [UInt8] where T: FixedWidthInteger {
-    withUnsafeBytes(of: value.littleEndian, Array.init)
-}
-
-public extension VideoEncoder {
-    func createStreamClientListener() -> StreamClientListener {
-        class StreamClientHandler: StreamClientListener {
-            
-            private let encoder: VideoEncoder
-            
-            init(encoder: VideoEncoder) {
-                self.encoder = encoder
-            }
-            
-            func onRequestKeyframe() {
-                encoder.forceKeyFrame()
-            }
-        }
-        return StreamClientHandler(encoder: self)
-    }
-}
-
-public extension String {
-    func removePrefix(regex: String) -> String {
-        if self.hasPrefix(regex) {
-            return String(self.dropFirst(regex.count))
-        }
-        return self
-    }
-    
-    func indexes(char: Character) -> [String.Index] {
-        var indexes = [String.Index]()
-        for index in 0..<count {
-            let i = self.index(startIndex, offsetBy: index)
-            let c = self[i]
-            if c == char { indexes.append(i) }
-        }
-        return indexes
-    }
+  withUnsafeBytes(of: value.littleEndian, Array.init)
 }
