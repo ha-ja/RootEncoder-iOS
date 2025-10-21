@@ -8,6 +8,7 @@
 
 import Foundation
 
+// TODO: Not sure about this…Check for other Swift implementations. Refactor maybe as actor class.
 public class SynchronizedQueue<T> {
     private var elements = [T]()
     private let semaphore = DispatchSemaphore(value: 0)

@@ -28,6 +28,7 @@ public class BaseSender {
     
     public func sendMediaFrame(mediaFrame: MediaFrame) {
         if running && !queue.enqueue(mediaFrame) {
+          // TODO: Not sure about this, if this is needed at all. Enqueuing media frame shoulb be sufficient.
             if mediaFrame.type == MediaFrame.MediaType.VIDEO {
                 print("Video frame discarded")
                 droppedVideoFrames += 1
